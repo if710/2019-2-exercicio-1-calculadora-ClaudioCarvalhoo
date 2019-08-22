@@ -2,7 +2,9 @@ package br.ufpe.cin.android.calculadora
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -69,8 +71,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_Equal.setOnClickListener{
-            val result = eval(text_calc.text.toString())
-            text_info.text = result.toString()
+            try {
+                val result = eval(text_calc.text.toString())
+                text_info.text = result.toString()
+            }catch (e:java.lang.RuntimeException){
+                Toast.makeText(this, "Expressão inválida, vacilou.", Toast.LENGTH_SHORT).show()
+            }catch (e:Exception){
+                Toast.makeText(this, "Realmente nem sei como vc fez isso.", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
