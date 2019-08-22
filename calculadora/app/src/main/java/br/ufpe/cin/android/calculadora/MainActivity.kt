@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Para cada botão, faço com que ele adicione to text_calc seu valor ao final do valor que já está lá atualmente.
         btn_0.setOnClickListener{
             text_calc.append("0")
         }
@@ -66,28 +67,34 @@ class MainActivity : AppCompatActivity() {
         btn_RParen.setOnClickListener{
             text_calc.append(")")
         }
+        //Para o botão de clear, troco o valor atual por uma string vazia.
         btn_Clear.setOnClickListener{
             text_calc.setText("")
         }
 
+        //Quando o botão de = é pressionado, chama a função eval para o text que estiver no text_calc.
         btn_Equal.setOnClickListener{
             try {
                 val result = eval(text_calc.text.toString())
                 text_info.text = result.toString()
             }catch (e:java.lang.RuntimeException){
+                //Caso a função eval falhe, crio um toast para avisar ao usuário que algo de errado não está certo.
                 Toast.makeText(this, "Expressão inválida, vacilou.", Toast.LENGTH_SHORT).show()
             }catch (e:Exception){
+                //Dado que a função de eval só joga explicitamente runtime exception, seria uma proeza entrar aqui. Mas, se o cara conseguir, ele toma um toast com mensagem diferenciada pela façanha.
                 Toast.makeText(this, "Realmente nem sei como vc fez isso.", Toast.LENGTH_LONG).show()
             }
         }
     }
 
+    //Dou um override na função que salva o estado antes da atividade ser reiniciada, salvando os valores dos dois textos em um estado que prevalecerá.
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("info", text_info.text.toString())
         outState.putString("calc", text_calc.text.toString())
     }
 
+    //Dou um override na função que recupera o estado após a atividade ser reiniciada e, com ela, os valores que salvei na função acima, podendo assim recolocá-los onde eles estavam antes.
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         text_info.text = savedInstanceState.getString("info")

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Troquei o parent por uma ScrollView para conseguirmos usar o teclado inteiro com certeza mesmo se a tela for pequena-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,10 +13,12 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="br.ufpe.cin.android.calculadora.MainActivity">
 
+    <!--Começo da ConstraintLayout-->
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        <!--Associo os lados desse TextView com os lados do parent, e a parte debaixo com o topo do texto que ficará abaixo dele-->
         <TextView
                 android:id="@+id/text_info"
                 android:layout_width="match_parent"
@@ -27,6 +30,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
 
+        <!--Faço o mesmo que o de cima, mas associonado o topo com o TextView que ficará acima.-->
         <EditText
                 android:id="@+id/text_calc"
                 android:layout_width="match_parent"
@@ -42,6 +46,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
 
+        <!--Para cada botão, associo o topo com a parte debaixo do que ficará em cima dele, sua direita com a esquerda do que ficará à sua direita, etc...-->
             <Button
                     android:id="@+id/btn_7"
                     style="@style/Widget.AppCompat.Button.Borderless"
