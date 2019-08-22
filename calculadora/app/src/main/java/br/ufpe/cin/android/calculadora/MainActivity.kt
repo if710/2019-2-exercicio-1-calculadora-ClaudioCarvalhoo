@@ -67,6 +67,11 @@ class MainActivity : AppCompatActivity() {
         btn_Clear.setOnClickListener{
             text_calc.setText("")
         }
+
+        btn_Equal.setOnClickListener{
+            val result = eval(text_calc.text.toString())
+            text_info.text = result.toString()
+        }
     }
 
     //Como usar a função:
