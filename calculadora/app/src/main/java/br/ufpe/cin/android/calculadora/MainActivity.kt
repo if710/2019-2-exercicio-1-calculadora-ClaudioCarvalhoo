@@ -82,6 +82,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("info", text_info.text.toString())
+        outState.putString("calc", text_calc.text.toString())
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        text_info.text = savedInstanceState.getString("info")
+        text_calc.setText(savedInstanceState.getString("calc"))
+    }
+
     //Como usar a função:
     // eval("2+2") == 4.0
     // eval("2+3*4") = 14.0
